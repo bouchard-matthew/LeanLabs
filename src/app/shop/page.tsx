@@ -1,12 +1,12 @@
 "use client";
 
-import { Typography } from "@mui/material";
 import { Container } from "../../Design";
+import { Products } from "../../Components/Products";
 
 const page = () => {
   return (
     <Container>
-      <Typography>All Products</Typography>
+      <Products />
     </Container>
   );
 };
