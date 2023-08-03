@@ -15,7 +15,8 @@ const ImageSlider = ({ images }: Props) => {
           borderRadius: 0,
         },
       }}
-      sx={{ margin: "20px", width: "100%", objectFit: "contain", height: "100%" }}
+      autoPlay={false}
+      sx={{ textAlign: "center", margin: "20px", width: "100%", objectFit: "contain", height: "100%" }}
     >
       {images.map((item, i) => (
         <Image width={200} height={200} key={i} src={item} alt={item} />

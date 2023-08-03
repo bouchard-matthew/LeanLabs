@@ -8,11 +8,13 @@ const ProductCard = (product: Product) => {
   const location = useRouter();
 
   return (
-    <Box onClick={() => location.push(`/shop/${product.category}/${product.title}`)}>
-      <ImageSlider images={["https://picsum.photos/200/200"]} />
-      <Typography variant="h5">{product.title}</Typography>
-      <Typography>{product.description}</Typography>
-      <Typography>{product.price} / Tub</Typography>
+    <Box mx={8} onClick={() => location.push(`/shop/category/${product.category}/${product.title}`)}>
+      <ImageSlider images={["https://picsum.photos/200/200", "https://picsum.photos/200/200", "https://picsum.photos/200/200"]} />
+      <Typography fontSize={18} fontWeight={600} variant="h5">
+        {product.title}
+      </Typography>
+      <Typography fontSize={14}>{product.description}</Typography>
+      <Typography fontSize={14}>{product.price} / Tub</Typography>
     </Box>
   );
 };

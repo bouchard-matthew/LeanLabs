@@ -1,11 +1,11 @@
 import db from "../../Config/firebaseConfig";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, where, query } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Product } from "../../Types/types";
 
-const useProducts = () => {
+const useCategoryProducts = (path: string) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const docRef = collection(db, "products");
+  const docRef = query(collection(db, "products"), where("category", "==", path));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(docRef, (querySnapshot) => {
@@ -22,4 +22,4 @@ const useProducts = () => {
   return products;
 };
 
-export default useProducts;
+export default useCategoryProducts;
