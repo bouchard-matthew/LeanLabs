@@ -20,7 +20,7 @@ const useProduct = (title: String) => {
     };
   }, []);
 
-  return products;
+  return products[0];
 };
 
 export default useProduct;

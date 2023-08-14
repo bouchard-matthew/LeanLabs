@@ -3,7 +3,7 @@
 import { Container } from "../../Design";
 import { useParams } from "next/navigation";
 import { useProduct } from "../../Hooks/useProduct";
-import { ProductCard } from "../ProductCard";
+import { ImageSlider } from "../../Design";
 
 const ProductPage = () => {
 
@@ -13,7 +13,7 @@ const ProductPage = () => {
 
     return (
         <Container sx={{ p: 10 }}>
-            Product
+            <ImageSlider height={600} width={600} images={["https://picsum.photos/600/600", "https://picsum.photos/600/600", "https://picsum.photos/600/600"]} />
         </Container>
     );
 };
