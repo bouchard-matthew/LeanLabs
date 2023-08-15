@@ -17,10 +17,15 @@ import Button from "@mui/material/Button";
 const ProductPage = () => {
   const params = useParams();
   const product = useProduct(decodeURI(params.product));
-  const [flavor, setFlavor] = useState(product ? product.flavors[0] : "Unflavored");
+  const [flavor, setFlavor] = useState(
+    product ? product.flavors[0] : "Unflavored"
+  );
   const [alignment, setAlignment] = useState("1");
 
-  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
     setAlignment(newAlignment);
   };
 
@@ -28,7 +33,12 @@ const ProductPage = () => {
     <>
       {product && (
         <Container>
-          <Grid sx={{ display: "flex", justifyContent: "center" }} container spacing={0} columns={{ xs: 2, sm: 8, md: 12 }}>
+          <Grid
+            sx={{ display: "flex", justifyContent: "center" }}
+            container
+            spacing={0}
+            columns={{ xs: 2, sm: 8, md: 12 }}
+          >
             <Grid item>
               <Box
                 sx={{
@@ -37,9 +47,9 @@ const ProductPage = () => {
                   textAlign: "left",
                   flexDirection: "column",
                   justifyContent: "center",
-                  border: 1,
+                  borderRight: 1,
                   borderColor: "grey.500",
-                  borderRadius: 1,
+                  marginBottom: 5,
                 }}
               >
                 <Typography fontWeight="bold" fontSize={30} margin={5}>
@@ -49,7 +59,11 @@ const ProductPage = () => {
                 <ImageSlider
                   height={400}
                   width={400}
-                  images={["https://picsum.photos/400/400", "https://picsum.photos/400/400", "https://picsum.photos/400/400"]}
+                  images={[
+                    "https://picsum.photos/400/400",
+                    "https://picsum.photos/400/400",
+                    "https://picsum.photos/400/400",
+                  ]}
                 />
 
                 <Typography fontWeight="bold" fontSize={20} margin={5}>
@@ -60,16 +74,28 @@ const ProductPage = () => {
               </Box>
             </Grid>
             <Grid item>
-              <Box sx={{ maxHeight: "70vh", width: "70vh", textAlign: "left", flexDirection: "column", display: "flex" }}>
+              <Box
+                sx={{
+                  maxHeight: "90vh",
+                  width: "70vh",
+                  textAlign: "left",
+                  flexDirection: "column",
+                  display: "flex",
+                }}
+              >
                 <Typography margin={5} fontWeight="bold" fontSize={20}>
                   {product.price}
                 </Typography>
 
-                <FormControl fullWidth sx={{ m: 5 }}>
+                <FormControl sx={{ m: 5 }}>
                   <Typography fontWeight="bold" fontSize={20}>
                     Flavor:
                   </Typography>
-                  <Select value={flavor} onClick={(event) => setFlavor(event.target.textContent)}>
+                  <Select
+                    value={flavor}
+                    onClick={(event) => setFlavor(event.target.textContent)}
+                    inputProps={{ MenuProps: { disableScrollLock: true } }}
+                  >
                     {product &&
                       product.flavors.map((flavor) => {
                         return (
@@ -81,17 +107,27 @@ const ProductPage = () => {
                   </Select>
                 </FormControl>
 
-                <Typography fontWeight="bold" fontSize={20} marginLeft={5} marginBottom={2}>
+                <Typography fontWeight="bold" fontSize={20} marginLeft={5}>
                   Quantity:
                 </Typography>
 
-                <ToggleButtonGroup color="primary" value={alignment} exclusive onChange={handleChange} aria-label="Platform" sx={{ ml: 5 }}>
+                <ToggleButtonGroup
+                  color="primary"
+                  value={alignment}
+                  exclusive
+                  onChange={handleChange}
+                  aria-label="Platform"
+                  sx={{ ml: 5, mb: 5 }}
+                >
                   <ToggleButton value="1">1</ToggleButton>
                   <ToggleButton value="2">2</ToggleButton>
                   <ToggleButton value="3">3</ToggleButton>
                 </ToggleButtonGroup>
 
-                <Button variant="contained" sx={{ m: 5 }}>
+                <Button
+                  variant="contained"
+                  sx={{ m: 5, backgroundColor: "#006241" }}
+                >
                   Add to cart
                 </Button>
               </Box>

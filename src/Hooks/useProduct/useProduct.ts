@@ -6,7 +6,7 @@ import { Product } from "../../Types/types";
 const useProduct = (title: String) => {
   const [products, setProducts] = useState<Product[]>([]);
   const docRef = collection(db, "products");
-  const productQuery = query(docRef, where("title", '==', title));
+  const productQuery = query(docRef, where("title", "==", title));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(productQuery, (querySnapshot) => {
