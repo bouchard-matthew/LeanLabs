@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useProduct } from "../../Hooks/useProduct";
@@ -13,26 +14,28 @@ import Select from "@mui/material/Select";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
+import { ProductGrid } from "../../Design/ProductGrid";
+import { useRandomProducts } from "../../Hooks/useRandomProducts";
 
 const ProductPage = () => {
   const params = useParams();
   const product = useProduct(decodeURI(params.product));
-  const [flavor, setFlavor] = useState(
-    product ? product.flavors[0] : "Unflavored"
-  );
-  const [alignment, setAlignment] = useState("1");
+  const randomProducts = useRandomProducts(params.category);
+  const [flavor, setFlavor] = useState("");
+
+  const [quantity, setQuantity] = useState(1);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newAlignment: number
   ) => {
-    setAlignment(newAlignment);
+    setQuantity(newAlignment);
   };
 
   return (
     <>
       {product && (
-        <Container>
+        <Container flexDirection={"column"}>
           <Grid
             sx={{ display: "flex", justifyContent: "center" }}
             container
@@ -48,6 +51,7 @@ const ProductPage = () => {
                   flexDirection: "column",
                   justifyContent: "center",
                   borderRight: 1,
+                  borderLeft: 1,
                   borderColor: "grey.500",
                   marginBottom: 5,
                 }}
@@ -113,15 +117,20 @@ const ProductPage = () => {
 
                 <ToggleButtonGroup
                   color="primary"
-                  value={alignment}
+                  value={quantity}
                   exclusive
                   onChange={handleChange}
                   aria-label="Platform"
                   sx={{ ml: 5, mb: 5 }}
                 >
-                  <ToggleButton value="1">1</ToggleButton>
-                  <ToggleButton value="2">2</ToggleButton>
-                  <ToggleButton value="3">3</ToggleButton>
+                  {product &&
+                    product.quantity.map((quantity) => {
+                      return (
+                        <ToggleButton key={quantity} value={quantity}>
+                          {quantity}
+                        </ToggleButton>
+                      );
+                    })}
                 </ToggleButtonGroup>
 
                 <Button
@@ -131,6 +140,24 @@ const ProductPage = () => {
                   Add to cart
                 </Button>
               </Box>
+            </Grid>
+          </Grid>
+
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              margin: 10,
+              flexDirection: "column",
+              fontWeight: "bold",
+            }}
+            container
+            spacing={0}
+            columns={{ xs: 2, sm: 8, md: 12 }}
+          >
+            Customers Have Also Bought:
+            <Grid sx={{ m: 5 }} item>
+              <ProductGrid products={randomProducts} />
             </Grid>
           </Grid>
         </Container>
