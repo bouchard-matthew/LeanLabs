@@ -3,8 +3,8 @@
 import { Container, ImageSlider } from "../../Design";
 import { useRandomProducts } from "../../Hooks/useRandomProducts";
 import { ProductGrid } from "../../Design/ProductGrid";
-import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const Landing = () => {
   var items = [];
@@ -16,7 +16,9 @@ const Landing = () => {
 
   return (
     <Container flexDirection={"column"}>
-      <ImageSlider width={600} height={600} images={items} />
+      <Box sx={{ width: { xs: "80%", md: "600px" }, height: { xs: "70vw", md: "600px" } }}>
+        <ImageSlider width={600} height={600} images={items} />
+      </Box>
 
       <Typography
         sx={{
