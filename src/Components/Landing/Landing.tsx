@@ -5,13 +5,13 @@ import { useRandomProducts } from "../../Hooks/useRandomProducts";
 import { ProductGrid } from "../../Design/ProductGrid";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import SupplementPhoto from "../../../Photos/Supplement Photo.webp";
+import SupplementPhoto from "../../../Photos/whey.webp";
+import SupplementPhoto2 from "../../../Photos/Supplement Photo.webp";
 
 const Landing = () => {
   var items = [];
-  for (let i = 0; i < 6; i++) {
-    items.push(SupplementPhoto);
-  }
+  items.push(SupplementPhoto);
+  items.push(SupplementPhoto2);
 
   useRandomProducts();
 
@@ -19,11 +19,10 @@ const Landing = () => {
     <Container flexDirection={"column"}>
       <Box
         sx={{
-          width: { xs: "90%", md: "600px" },
-          height: { xs: "20%" },
+          width: "100%",
         }}
       >
-        <ImageSlider width={600} height={600} images={items} />
+        <ImageSlider width={800} height={600} images={items} />
       </Box>
 
       <Box

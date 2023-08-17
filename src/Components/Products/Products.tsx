@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useAllProducts } from "../../Hooks/useAllProducts";
 import { ProductGrid } from "../../Design/ProductGrid";

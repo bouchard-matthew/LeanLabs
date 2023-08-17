@@ -1,5 +1,3 @@
-"use client";
-
 import { CategoriesPage } from "../../../../Components/CategoriesPage";
 
 const page = () => {

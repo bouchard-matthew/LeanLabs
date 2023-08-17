@@ -23,7 +23,6 @@ const ImageSlider = ({ images, width = 200, height = 300 }: Props) => {
         <Image
           style={{
             objectFit: "contain",
-            width: "100%",
           }}
           width={width}
           height={height}

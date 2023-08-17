@@ -46,7 +46,6 @@ const ProductPage = () => {
             <Grid item>
               <Box
                 sx={{
-                  maxHeight: "90vh",
                   width: { xs: "90%", md: "70vh" },
                   textAlign: "left",
                   mx: { xs: "5%", md: "0%" },
@@ -56,7 +55,6 @@ const ProductPage = () => {
                   borderLeft: 1,
                   borderColor: "grey.500",
                   marginBottom: 5,
-                  overflow: "auto",
                 }}
               >
                 <Typography fontWeight="bold" fontSize={30} margin={5}>
