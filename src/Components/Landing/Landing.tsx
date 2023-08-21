@@ -3,35 +3,44 @@
 import { Container, ImageSlider } from "../../Design";
 import { useRandomProducts } from "../../Hooks/useRandomProducts";
 import { ProductGrid } from "../../Design/ProductGrid";
-import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import SupplementPhoto from "../../../Photos/whey.webp";
+import SupplementPhoto2 from "../../../Photos/Supplement Photo.webp";
 
 const Landing = () => {
   var items = [];
-  for (let i = 0; i < 6; i++) {
-    items.push("https://picsum.photos/600/600");
-  }
+  items.push(SupplementPhoto);
+  items.push(SupplementPhoto2);
 
   useRandomProducts();
 
   return (
     <Container flexDirection={"column"}>
-      <ImageSlider width={600} height={600} images={items} />
-
-      <Typography
-        sx={{
-          mt: 10,
-          fontWeight: "bold",
-          fontSize: 30,
-        }}
-      >
-        Best Sellers:
-      </Typography>
       <Box
         sx={{
+          width: "100%",
+        }}
+      >
+        <ImageSlider width={800} height={600} images={items} />
+      </Box>
+
+      <Box
+        sx={{
+          height: { xs: "50%", md: "600px" },
           m: 3,
         }}
       >
+        <Typography
+          sx={{
+            mt: 10,
+            mb: 5,
+            fontWeight: "bold",
+            fontSize: 30,
+          }}
+        >
+          Best Sellers:
+        </Typography>
         <ProductGrid products={useRandomProducts()} />
       </Box>
     </Container>

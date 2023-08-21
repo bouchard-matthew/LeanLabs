@@ -11,11 +11,10 @@ import { Product } from "../../Types/types";
 
 const useRandomProducts = (category?: String) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const random = Math.floor(Math.random() * 18);
   const docRef = collection(db, "products");
   const productQuery = category
     ? query(docRef, where("category", "==", category), limit(3))
-    : query(docRef, where("stock", "<=", random), limit(3));
+    : query(docRef, where("stock", "<=", 20), limit(3));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(productQuery, (querySnapshot) => {

@@ -1,6 +1,6 @@
 import { Landing } from "../Components/Landing";
 
-export function Home() {
+function Home() {
   return <Landing />;
 }
 
