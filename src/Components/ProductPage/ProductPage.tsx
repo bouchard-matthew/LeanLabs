@@ -17,32 +17,35 @@ import Button from "@mui/material/Button";
 import { ProductGrid } from "../../Design/ProductGrid";
 import { useRandomProducts } from "../../Hooks/useRandomProducts";
 import Photo from "../../../Photos/proteinContainer.png";
+import { useCartStore } from "../../Context/useCartStore";
 
 const ProductPage = () => {
   const params = useParams();
   const product = useProduct(decodeURI(params.product));
   const randomProducts = useRandomProducts(params.category);
   const [flavor, setFlavor] = useState("");
-
   const [quantity, setQuantity] = useState(1);
+  const { cart, addToCart } = useCartStore();
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: number
-  ) => {
+  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: number) => {
     setQuantity(newAlignment);
   };
+
+  const handleAddToCart = () => {
+    let tmp = { ...product, flavor, quantity };
+    Object.keys(tmp).forEach((key) => {
+      if (key == "flavors" || key == "stock") delete tmp[key];
+    });
+    addToCart({ ...tmp });
+  };
+
+  console.log(cart);
 
   return (
     <>
       {product && (
         <Container flexDirection={"column"}>
-          <Grid
-            sx={{ display: "flex", justifyContent: "center" }}
-            container
-            spacing={0}
-            columns={{ xs: 2, sm: 8, md: 12 }}
-          >
+          <Grid sx={{ display: "flex", justifyContent: "center" }} container spacing={0} columns={{ xs: 2, sm: 8, md: 12 }}>
             <Grid item>
               <Box
                 sx={{
@@ -61,11 +64,7 @@ const ProductPage = () => {
                   {product.title}
                 </Typography>
 
-                <ImageSlider
-                  height={500}
-                  width={300}
-                  images={[Photo, Photo, Photo]}
-                />
+                <ImageSlider height={500} width={300} images={[Photo, Photo, Photo]} />
 
                 <Typography fontWeight="bold" fontSize={20} margin={5}>
                   Description:
@@ -84,12 +83,7 @@ const ProductPage = () => {
                   display: "flex",
                 }}
               >
-                <Typography
-                  margin={{ xs: 0, md: 5 }}
-                  marginBottom={{ xs: 5 }}
-                  fontWeight="bold"
-                  fontSize={20}
-                >
+                <Typography margin={{ xs: 0, md: 5 }} marginBottom={{ xs: 5 }} fontWeight="bold" fontSize={20}>
                   {product.price}
                 </Typography>
 
@@ -97,11 +91,7 @@ const ProductPage = () => {
                   <Typography fontWeight="bold" fontSize={20}>
                     Flavor:
                   </Typography>
-                  <Select
-                    value={flavor}
-                    onClick={(event) => setFlavor(event.target.textContent)}
-                    inputProps={{ MenuProps: { disableScrollLock: true } }}
-                  >
+                  <Select value={flavor} onClick={(event) => setFlavor(event.target.textContent)} inputProps={{ MenuProps: { disableScrollLock: true } }}>
                     {product &&
                       product.flavors.map((flavor) => {
                         return (
@@ -113,11 +103,7 @@ const ProductPage = () => {
                   </Select>
                 </FormControl>
 
-                <Typography
-                  fontWeight="bold"
-                  fontSize={20}
-                  marginLeft={{ xs: 0, md: 5 }}
-                >
+                <Typography fontWeight="bold" fontSize={20} marginLeft={{ xs: 0, md: 5 }}>
                   Quantity:
                 </Typography>
 
@@ -139,10 +125,7 @@ const ProductPage = () => {
                     })}
                 </ToggleButtonGroup>
 
-                <Button
-                  variant="contained"
-                  sx={{ m: 5, backgroundColor: "#006241" }}
-                >
+                <Button variant="contained" sx={{ m: 5, backgroundColor: "#006241" }} onClick={handleAddToCart}>
                   Add to cart
                 </Button>
               </Box>
